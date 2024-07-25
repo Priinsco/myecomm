@@ -5,8 +5,8 @@
 <!-- admin_panel\categories\add.php -->
 <h3 class="text-dark mt-2 text-center">Ajouter des catégries pour vos produits</h3>
 <?php 
-if(isset($querryMessage)){
-    echo "<div class='container text-light text-center bg-success'>". $querryMessage ."</p></div>";
+if(isset($successQuerryMessage)){
+    echo "<div class='container text-light text-center bg-success'>". $quersuccessQuerryMessageryMessage ."</p></div>";
 }else if(isset($failQuerryMessage)){
     echo "<div class='container text-light text-center bg-danger'>". $failQuerryMessage ."</p></div>";
 }

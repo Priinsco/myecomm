@@ -1,3 +1,6 @@
+<?php 
+require("admin_panel/products/displayAllProducts.php");
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -77,65 +80,29 @@
                 <div class="col-md-10">
                     <!-- Products -->
                     <div class="row">
-                        <div class="col-md-4 mb-1">
-                            <div class="card">
-                                <img src="images/avocat.jpg" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <a href="#" class="btn btn-info">Ajouter au panier</a>
-                                    <a href="#" class="btn btn-secondary">Voir plus</a>
-                                </div>
-                            </div>
-                        </div>
+                    <?php 
 
-                        <div class="col-md-4 mb-1">
-                            <div class="card">
-                                <img src="images/mangue.jpg" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <a href="#" class="btn btn-info">Ajouter au panier</a>
-                                    <a href="#" class="btn btn-secondary">Voir plus</a>
+                    foreach($allProducts as $product){
+                                $product_id = $product['product_id'];
+                                $product_name = $product['name'];
+                                $product_desc = $product['description'];
+                                $product_price = $product['price'];
+                                $product_image1 = $product['product_image1'];
+                                echo "<div class='col-md-4 mb-1'>
+                            <div class='card'>
+                                <img src='admin_panel/product_images/$product_image1' class='card-img-top' alt='...'>
+                                <div class='card-body'>
+                                    <h5 class='card-title'>$product_name</h5>
+                                    <p class='card-text'>$product_desc.</p>
+                                    <p class='card-text'>Prix: $product_price Fcfa</p>
+                                    <a href='#' class='btn btn-info'>Ajouter au panier</a>
+                                    <a href='#' class='btn btn-secondary'>Voir plus</a>
                                 </div>
                             </div>
-                        </div>
-                        
-                        <div class="col-md-4 mb-1">
-                            <div class="card">
-                                <img src="images/orange.png" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <a href="#" class="btn btn-info">Ajouter au panier</a>
-                                    <a href="#" class="btn btn-secondary">Voir plus</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4 mb-1">
-                            <div class="card">
-                                <img src="images/orange.png" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <a href="#" class="btn btn-info">Ajouter au panier</a>
-                                    <a href="#" class="btn btn-secondary">Voir plus</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4 mb-1">
-                            <div class="card">
-                                <img src="images/orange.png" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <a href="#" class="btn btn-info">Ajouter au panier</a>
-                                    <a href="#" class="btn btn-secondary">Voir plus</a>
-                                </div>
-                            </div>
-                        </div>
+                        </div>";
+                                
+                            }
+                    ?>
                     </div>
                 </div>
                 <div class="col-md-2 bg-secondary p-0">

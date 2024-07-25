@@ -1,6 +1,7 @@
 <?php 
 require("../categories/displayAllCategories.php");
 require("../brands/displayAllBrands.php");
+require("addProductActions.php");
 
 ?>
 <!DOCTYPE html>
@@ -20,6 +21,15 @@ require("../brands/displayAllBrands.php");
 <body class="bg-light">
     <div class="container">
         <h3 class="text-center mt-2">Ajouter un nouveau produit</h3>
+
+        <?php 
+            if(isset($successQuerryMessage)){
+                echo "<div class='container text-light text-center bg-success'>". $successQuerryMessage ."</p></div>";
+            }else if(isset($failQuerryMessage)){
+                echo "<div class='container text-light text-center bg-danger'>". $failQuerryMessage ."</p></div>";
+            }
+        ?>
+
         <form method="post" class="py-0" action="" enctype="multipart/form-data">
             <div class="form-outline mb-2 w-50 m-auto">
                 <label class="form-label" for="product_name">Nom</label>
@@ -30,11 +40,11 @@ require("../brands/displayAllBrands.php");
                 <input type="text" id="product_desc" name="product_desc" class="form-control py-0" placeholder="Entrez la description du produit" autocomplete="off" required>
             </div>
             <div class="form-outline mb-2 w-50 m-auto">
-                <label class="form-label" for="product_keyword">Mots clé du produit</label>
-                <input type="text" id="product_keywords" name="product_keyword" class="form-control py-0" placeholder="Entrez des mots clé du produit" autocomplete="off" required>
+                <label class="form-label" for="product_keywords">Mots clé du produit</label>
+                <input type="text" id="product_keywords" name="product_keywords" class="form-control py-0" placeholder="Entrez des mots clé du produit" autocomplete="off" required>
             </div>
             <div class="form-outline mb-2 w-50 m-auto">
-                <select class="form-control py-0" value="product_category" id=""> <i class="fas fa-angle-right"></i>
+                <select class="form-control py-0" name="product_category" id=""> <i class="fas fa-angle-right"></i>
                 <option value="">Selectionnez une catégorie</option>
                     <?php foreach($allCategories as $categorie){
                             $categorie_id = $categorie['id'];
@@ -47,7 +57,7 @@ require("../brands/displayAllBrands.php");
                 </select>
             </div>
             <div class="form-outline mb-2 w-50 m-auto">
-                <select class="form-control py-0" value="brand" id=""> <i class="fa fa-arrow-down"></i>
+                <select class="form-control py-0" name="product_brand" id=""> <i class="fa fa-arrow-down"></i>
                 <option value="">Selectionnez une marque</option>
                     <?php foreach($allBrands as $brand){
                             $brande_id = $brand['id'];
