@@ -28,7 +28,7 @@ require("admin_panel/products/displayAllProducts.php");
                 <div class="collapse navbar-collapse" id="navbarScroll">
                     <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                            <a class="nav-link active" aria-current="page" href="index.php">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Products</a>
@@ -50,8 +50,8 @@ require("admin_panel/products/displayAllProducts.php");
                         </li>
                     </ul>
                     <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-light" type="submit">Search</button>
+                        <input class="form-control me-2" type="search" name="search" placeholder="Chercher un produit" aria-label="Search">
+                        <button class="btn btn-outline-light" type="submit" name="search_product" aria-label="Search">Chercher</button>
                     </form>
                 </div>
             </div>
@@ -72,7 +72,7 @@ require("admin_panel/products/displayAllProducts.php");
          </div>
          <!-- third child -->
           <div class="bg-light ">
-                <h3 class="text-center">Hiden store</h3>
+                <h3 class="text-center">MyEcomm store</h3>
                 <p class="text-center">La communication est au coeur de l'ecommerce et de la communauté</p>
           </div>
           <!-- fourth child -->
@@ -82,7 +82,9 @@ require("admin_panel/products/displayAllProducts.php");
                     <div class="row">
                     <?php 
 
+                    if($stmt->rowCount() > 0){
                     foreach($allProducts as $product){
+                                
                                 $product_id = $product['product_id'];
                                 $product_name = $product['name'];
                                 $product_desc = $product['description'];
@@ -102,6 +104,11 @@ require("admin_panel/products/displayAllProducts.php");
                         </div>";
                                 
                             }
+                        }elseif(isset($faillSeach)){
+                            echo "<div class='col-md-12 text-center text-danger'>$faillSeach</div>";
+                        } else{
+                            echo "<h2 class='col-md-12 text-center text-danger'>stock épuisé votre marque préférée sera bientôt de retour</h2>";
+                        }
                     ?>
                     </div>
                 </div>
@@ -118,7 +125,7 @@ require("admin_panel/products/displayAllProducts.php");
                                 $brand_id = $brand['id'];
                                 $brand_name = $brand['name'];
                                 echo "<li class='nav-item'>
-                                            <a class='nav-link text-light' href='index.php?$brand_id'>$brand_name</a>
+                                            <a class='nav-link text-light' href='index.php?brand=$brand_id'>$brand_name</a>
                                      </li>";
                                 
                             }
@@ -135,7 +142,7 @@ require("admin_panel/products/displayAllProducts.php");
                             $categorie_id = $categorie['id'];
                             $categorie_name = $categorie['name'];
                                 echo "<li class='nav-item'>
-                                            <a class='nav-link text-light' href='index.php?$categorie_id'>$categorie_name</a>
+                                            <a class='nav-link text-light' href='index.php?category=$categorie_id'>$categorie_name</a>
                                      </li>";
                                 
                             }
