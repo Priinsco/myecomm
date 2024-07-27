@@ -41,17 +41,14 @@ try{
         $faillSeach = "Entrez des mots clés qui ne contiennent pas de caractères spéciaux comme des appostrophes (<span class='text-warning'>'</span>) par exemple";
     }
 
-
-
         // If the brand name does not exist, insert it into the database
-        if($stmt->rowCount() > 0){
+    if($stmt->rowCount() > 0){
                       
-            $allProducts = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        }else{
-            $empty = "Aucune marque enregistrée pour l'instant."; 
-        }    
+        $allProducts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }else{
+        $empty = "Aucune marque enregistrée pour l'instant."; 
+    }    
     
-    }catch(PDOException $e){
-        echo "echec";
-    }
+}catch(PDOException $e){
+    echo "echec";
+}

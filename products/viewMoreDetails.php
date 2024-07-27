@@ -1,12 +1,40 @@
 <?php
-require("admin_panel/products/displayAllProducts.php");
+require("../admin_panel/products/displayAllProducts.php");
 
 ?>
 <!doctype html>
 <html lang="en">
     
   <!-- html head -->
-  <?php include("includes/head.php");?>
+  <?php include("../includes/head.php");?>
+  <style>
+    *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.logo{
+    width: 10%;
+    height: 10%;
+}
+.card-img-top{
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+.c-orange{
+    background-color: orange;
+    font-size: 20px;
+}
+.tc-orange{
+    color: orange;
+    font-size: 20px;
+}
+.lar_30{
+    width: 30px;
+}
+
+  </style>
   <!-- end html head -->
 
   <body>
@@ -14,7 +42,7 @@ require("admin_panel/products/displayAllProducts.php");
      <div class="container-fluid p-0">
 
         <!-- first child -->
-        <?php include("includes/navbar.php");?>
+        <?php include("../includes/navbar.php");?>
 
         <!-- second child -->
          <div class="navbar navbar-expand-lg navbar-dark bg-secondary">
@@ -41,33 +69,33 @@ require("admin_panel/products/displayAllProducts.php");
                     <div class="row">
                     <?php 
 
-                    if($stmt->rowCount() > 0){
-                    foreach($allProducts as $product){
-                                
-                                $product_id = $product['product_id'];
-                                $product_name = $product['name'];
-                                $product_desc = $product['description'];
-                                $product_price = $product['price'];
-                                $product_image1 = $product['product_image1'];
-                                echo "<div class='col-md-4 mb-1'>
-                            <div class='card'>
-                                <img src='admin_panel/product_images/$product_image1' class='card-img-top' alt='...'>
-                                <div class='card-body'>
-                                    <h5 class='card-title'>$product_name</h5>
-                                    <p class='card-text'>$product_desc.</p>
-                                    <p class='card-text'>Prix: $product_price Fcfa</p>
-                                    <a href='#' class='btn btn-info'>Ajouter au panier</a>
-                                    <a href='#' class='btn btn-secondary'>Voir plus</a>
-                                </div>
-                            </div>
-                        </div>";
-                                
-                            }
-                        }elseif(isset($faillSeach)){
-                            echo "<div class='col-md-12 text-center text-danger'>$faillSeach</div>";
-                        } else{
-                            echo "<h2 class='col-md-12 text-center text-danger'>stock épuisé votre marque préférée sera bientôt de retour</h2>";
-                        }
+                        // if($stmt->rowCount() > 0){
+                        // foreach($allProducts as $product){
+                                    
+                        //             $product_id = $product['product_id'];
+                        //             $product_name = $product['name'];
+                        //             $product_desc = $product['description'];
+                        //             $product_price = $product['price'];
+                        //             $product_image1 = $product['product_image1'];
+                        //             echo "<div class='col-md-4 mb-1'>
+                        //         <div class='card'>
+                        //             <img src='admin_panel/product_images/$product_image1' class='card-img-top' alt='...'>
+                        //             <div class='card-body'>
+                        //                 <h5 class='card-title'>$product_name</h5>
+                        //                 <p class='card-text'>$product_desc.</p>
+                        //                 <p class='card-text'>Prix: $product_price Fcfa</p>
+                        //                 <a href='#' class='btn btn-info'>Ajouter au panier</a>
+                        //                 <a href='#' class='btn btn-secondary'>Voir plus</a>
+                        //             </div>
+                        //         </div>
+                        //     </div>";
+                                    
+                        //         }
+                        //     }elseif(isset($faillSeach)){
+                        //         echo "<div class='col-md-12 text-center text-danger'>$faillSeach</div>";
+                        //     } else{
+                        //         echo "<h2 class='col-md-12 text-center text-danger'>stock épuisé votre marque préférée sera bientôt de retour</h2>";
+                        //     }
                     ?>
                     </div>
                 </div>
@@ -79,12 +107,12 @@ require("admin_panel/products/displayAllProducts.php");
                             <a class="nav-link text-light" href="#">Livraison de marques</a>
                         </li>
                         <?php
-                        require 'admin_panel/brands/displayAllBrands.php';
+                        require '../admin_panel/brands/displayAllBrands.php';
                             foreach($allBrands as $brand){
                                 $brand_id = $brand['id'];
                                 $brand_name = $brand['name'];
                                 echo "<li class='nav-item'>
-                                            <a class='nav-link text-light' href='index.php?brand=$brand_id'>$brand_name</a>
+                                            <a class='nav-link text-light' href='../index.php?brand=$brand_id'>$brand_name</a>
                                      </li>";
                                 
                             }
@@ -96,12 +124,12 @@ require("admin_panel/products/displayAllProducts.php");
                             <a class="nav-link text-light" href="#">Catégories</a>
                         </li>
                         <?php
-                        require 'admin_panel/categories/displayAllCategories.php';
+                        require '../admin_panel/categories/displayAllCategories.php';
                         foreach($allCategories as $categorie){
                             $categorie_id = $categorie['id'];
                             $categorie_name = $categorie['name'];
                                 echo "<li class='nav-item'>
-                                            <a class='nav-link text-light' href='index.php?category=$categorie_id'>$categorie_name</a>
+                                            <a class='nav-link text-light' href='../index.php?category=$categorie_id'>$categorie_name</a>
                                      </li>";
                                 
                             }
@@ -110,7 +138,7 @@ require("admin_panel/products/displayAllProducts.php");
                 </div>
            </div>
         <!-- last child -->
-         <?php include("includes/footer.php") ?>
+         <?php include("../includes/footer.php") ?>
      </div>
 
 
