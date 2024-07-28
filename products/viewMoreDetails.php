@@ -1,5 +1,6 @@
 <?php
 require("../admin_panel/products/displayAllProducts.php");
+require("viewMoreDetailsActions.php");
 
 ?>
 <!doctype html>
@@ -32,6 +33,19 @@ require("../admin_panel/products/displayAllProducts.php");
 }
 .lar_30{
     width: 30px;
+}
+
+/* carousel style */
+
+.container img{
+    width: 650px;
+    height: 450px;
+    object-fit: contain;
+}
+.container{
+    width: 650px;
+    height: 450px;
+    margin-right: 3px;
 }
 
   </style>
@@ -67,36 +81,77 @@ require("../admin_panel/products/displayAllProducts.php");
                 <div class="col-md-10">
                     <!-- Products -->
                     <div class="row">
-                    <?php 
+                        <!-- card and carousel for product details -->
+                        <?php
 
-                        // if($stmt->rowCount() > 0){
-                        // foreach($allProducts as $product){
+
+                        if($product_infos){
+                                                                
+                            $product_id = $product_infos['product_id'];
+                            $product_name = $product_infos['name'];
+                            $product_desc = $product_infos['description'];
+                            $product_price = $product_infos['price'];
+                            $product_image1 = $product_infos['product_image1'];
+                            $product_image2 = $product_infos['product_image2'];
+                            $product_image3 = $product_infos['product_image3'];
+                            $brand_name;
+
+                            // card
+                            echo "<div class='col-md-4 mb-1'>
+                                        <div class='card'>
+                                            <img src='../admin_panel/product_images/$product_image1' class='card-img-top' alt='...'>
+                                            <div class='card-body'>
+                                                <h5 class='card-title bg-dark tc-orange text-center'>$product_name</h5>
+                                                <p class='card-text bg-dark text-light text-center'>$product_desc.</p>
+                                                <p class='card-text bg-dark text-light text-center'>Marque: <span class='tc-orange'>$brand_name</span></p>
+                                                <p class='card-text bg-dark text-light text-center'>Prix: <span class='tc-orange'>$product_price</span> Fcfa</p>
+                                                <a href='#' class='btn btn-info mx-4'>Ajouter au panier</a>
+                                                <a href='../index.php' class='btn btn-dark mx-0'>Retour</a>
+                                            </div>
+                                        </div>
+                                    </div>";
+
+
+                                
+                                    // carousel
+                                        echo "
+                                        
+                                        
+                                                <div class='container'>
+                                    <div id='carouselExampleDark' class='carousel carousel-dark slide'>
+                                        <div class='carousel-indicators'>
+                                            <button type='button' data-bs-target='#carouselExampleDark' data-bs-slide-to='0' class='active' aria-current='true' aria-label='Slide 1'></button>
+                                            <button type='button' data-bs-target='#carouselExampleDark' data-bs-slide-to='1' aria-label='Slide 2'></button>
+                                            <button type='button' data-bs-target='#carouselExampleDark' data-bs-slide-to='2' aria-label='Slide 3'></button>
+                                        </div>
+                                        <div class='carousel-inner c_inner'>
+                                            <div class='carousel-item active' data-bs-interval='1000'>
+                                            <img src='../admin_panel/product_images/$product_image1' class='d-block w-100' alt='...'>
+                                            </div>
+                                            <div class='carousel-item' data-bs-interval='1000'>
+                                            <img src='../admin_panel/product_images/$product_image2' class='d-block w-100' alt='...'>
+                                            </div>
+                                            <div class='carousel-item data-bs-interval='1000''>
+                                            <img src='../admin_panel/product_images/$product_image3' class='d-block w-100' alt='...'>
+                                            </div>
+                                        </div>
+                                        <button class='carousel-control-prev' type='button' data-bs-target='#carouselExampleDark' data-bs-slide='prev'>
+                                            <span class='carousel-control-prev-icon' aria-hidden='true'></span>
+                                            <span class='visually-hidden'>Previous</span>
+                                        </button>
+                                        <button class='carousel-control-next' type='button' data-bs-target='#carouselExampleDark' data-bs-slide='next'>
+                                            <span class='carousel-control-next-icon' aria-hidden='true'></span>
+                                            <span class='visually-hidden'>Next</span>
+                                        </button>
+                                    </div>
+                                </div>";
+                                        
                                     
-                        //             $product_id = $product['product_id'];
-                        //             $product_name = $product['name'];
-                        //             $product_desc = $product['description'];
-                        //             $product_price = $product['price'];
-                        //             $product_image1 = $product['product_image1'];
-                        //             echo "<div class='col-md-4 mb-1'>
-                        //         <div class='card'>
-                        //             <img src='admin_panel/product_images/$product_image1' class='card-img-top' alt='...'>
-                        //             <div class='card-body'>
-                        //                 <h5 class='card-title'>$product_name</h5>
-                        //                 <p class='card-text'>$product_desc.</p>
-                        //                 <p class='card-text'>Prix: $product_price Fcfa</p>
-                        //                 <a href='#' class='btn btn-info'>Ajouter au panier</a>
-                        //                 <a href='#' class='btn btn-secondary'>Voir plus</a>
-                        //             </div>
-                        //         </div>
-                        //     </div>";
-                                    
-                        //         }
-                        //     }elseif(isset($faillSeach)){
-                        //         echo "<div class='col-md-12 text-center text-danger'>$faillSeach</div>";
-                        //     } else{
-                        //         echo "<h2 class='col-md-12 text-center text-danger'>stock épuisé votre marque préférée sera bientôt de retour</h2>";
-                        //     }
-                    ?>
+                            } else{
+                                echo "<h2 class='col-md-12 text-center text-danger'>stock épuisé votre marque préférée sera bientôt de retour</h2>";
+                            }
+                        ?>
+                    
                     </div>
                 </div>
                 <div class="col-md-2 bg-secondary p-0">

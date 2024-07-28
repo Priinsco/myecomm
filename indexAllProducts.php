@@ -7,7 +7,6 @@ require("admin_panel/products/IndexAllProductsAction.php");
 
 ?>
 <?php require("includes/head.php")?>
-<?php require("includes/head.php")?>
   <body>
     <!-- nav bar -->
      <div class="container-fluid p-0">

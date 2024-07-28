@@ -10,6 +10,34 @@ require("admin_panel/products/displayAllProducts.php");
   <!-- end html head -->
 
   <body>
+    <style>
+        *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.logo{
+    width: 10%;
+    height: 10%;
+}
+.card-img-top{
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+.c-orange{
+    background-color: orange;
+    font-size: 20px;
+}
+.tc-orange{
+    color: orange;
+    font-size: 20px;
+}
+.lar_30{
+    width: 30px;
+}
+
+    </style>
     <!-- nav bar -->
      <div class="container-fluid p-0">
 
@@ -54,10 +82,9 @@ require("admin_panel/products/displayAllProducts.php");
                                 <img src='admin_panel/product_images/$product_image1' class='card-img-top' alt='...'>
                                 <div class='card-body'>
                                     <h5 class='card-title'>$product_name</h5>
-                                    <p class='card-text'>$product_desc.</p>
                                     <p class='card-text'>Prix: $product_price Fcfa</p>
                                     <a href='#' class='btn btn-info'>Ajouter au panier</a>
-                                    <a href='#' class='btn btn-secondary'>Voir plus</a>
+                                    <a href='products/viewMoreDetails.php?product_id=$product_id' class='btn btn-secondary'>Voir plus</a>
                                 </div>
                             </div>
                         </div>";

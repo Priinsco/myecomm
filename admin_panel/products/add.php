@@ -89,7 +89,7 @@ require("addProductActions.php");
                 <input type="text" id="product_price" name="product_price" class="form-control py-0" placeholder="Entrez le prix du produit" autocomplete="off" required>
             </div>
             <div class="form-outline mb-2 w-50 m-auto">
-                <button type="submit" name="ajouter" class="btn c-orange">Ajouter</button>
+                <button type="submit" name="ajouter" class="btn c-orange btn-warning">Ajouter</button>
             </div>
         </form>
     </div>
