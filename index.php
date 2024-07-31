@@ -1,6 +1,31 @@
 <?php
 require("admin_panel/products/displayAllProducts.php");
+// require("functions/common_function.php")
 
+
+// add product to cart function
+function cart(){
+    if(isset($_GET['add_to_cart'])){
+        Global $pdo;
+        $ip = getIPAddress();
+        $get_product_id = $_GET['add_to_cart'];
+
+        $select_query = "SELECT * FROM cart_details WHERE ip_address = ? AND product_id = ?";
+        $stmt = $pdo->prepare($select_query);
+        $stmt->execute([$ip, $get_product_id]);
+
+        if($stmt->rowCount() > 0){
+            echo "<script>alert('Cet article est déjà présent dans votre panier')</script>";
+            echo "<script>window.open('index.php', '_self')</script>";
+        }else{
+            $insert_query = "INSERT INTO cart_details (ip_address, product_id, quantity) VALUES (?,?,?)";
+            $stmt = $pdo->prepare($insert_query);
+            $stmt->execute([$ip, $get_product_id, 0]);
+            echo "<script>alert('L'article a été ajouté dans votre panier')</script>";
+            echo "<script>window.open('index.php', '_self')</script>";
+        }
+    }
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -43,6 +68,9 @@ require("admin_panel/products/displayAllProducts.php");
 
         <!-- first child -->
         <?php include("includes/navbar.php");?>
+        <!-- calling cart function -->
+         <?php cart(); ?>
+        <!-- end calling cart function -->
 
         <!-- second child -->
          <div class="navbar navbar-expand-lg navbar-dark bg-secondary">
@@ -83,7 +111,7 @@ require("admin_panel/products/displayAllProducts.php");
                                 <div class='card-body'>
                                     <h5 class='card-title'>$product_name</h5>
                                     <p class='card-text'>Prix: $product_price Fcfa</p>
-                                    <a href='#' class='btn btn-info'>Ajouter au panier</a>
+                                    <a href='index.php?add_to_cart=$product_id' class='btn btn-info'>Ajouter au panier</a>
                                     <a href='products/viewMoreDetails.php?product_id=$product_id' class='btn btn-secondary'>Voir plus</a>
                                 </div>
                             </div>

@@ -1,13 +1,22 @@
 <?php 
 require_once __DIR__ . '/database.php';
+// file to display some of the products...
 require("admin_panel/products/displayAllProducts.php");
+// file to display all products...
 require("admin_panel/products/IndexAllProductsAction.php");
+// common functions file is required for cart functionality ...
+require("functions/common_function.php")
 
     
 
 ?>
 <?php require("includes/head.php")?>
   <body>
+    <!-- calling cart function -->
+    <?php cart(); 
+         $cart_product_quantity = cartProductQuantity();
+    ?>
+        <!-- end calling cart function -->
     <!-- nav bar -->
      <div class="container-fluid p-0">
             <!-- first child -->
@@ -32,10 +41,10 @@ require("admin_panel/products/IndexAllProductsAction.php");
                             <a class="nav-link" href="#">Contact</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#"><i class="fa-solid fa-cart-shopping"></i><sup>1</sup></a>
+                            <a class="nav-link" href="cart.php"><i class="fa-solid fa-cart-shopping"></i><sup class="text-danger"><?=$cart_product_quantity?></sup></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Total price</a>
+                        <span class="nav-link">Prix Total <strong class="text-danger"><?=cartProductTotalPrice()?></strong> Fcfa</span>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link disabled" aria-disabled="true">Link</a>
@@ -87,9 +96,8 @@ require("admin_panel/products/IndexAllProductsAction.php");
                                 <img src='admin_panel/product_images/$product_image1' class='card-img-top' alt='...'>
                                 <div class='card-body'>
                                     <h5 class='card-title'>$product_name</h5>
-                                    <p class='card-text'>$product_desc.</p>
                                     <p class='card-text'>Prix: $product_price Fcfa</p>
-                                    <a href='#' class='btn btn-info'>Ajouter au panier</a>
+                                    <a href='indexAllProducts.php?add_to_cart=$product_id' class='btn btn-info'>Ajouter au panier</a>
                                     <a href='#' class='btn btn-secondary'>Voir plus</a>
                                 </div>
                             </div>

@@ -1,3 +1,44 @@
+<?php
+function getIPAddress() {  
+    //whether ip is from the share internet  
+     if(!empty($_SERVER['HTTP_CLIENT_IP'])) {  
+                $ip = $_SERVER['HTTP_CLIENT_IP'];  
+        }  
+    //whether ip is from the proxy  
+    elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {  
+                $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];  
+     }  
+//whether ip is from the remote address  
+    else{  
+             $ip = $_SERVER['REMOTE_ADDR'];  
+     }  
+     return $ip;  
+}  
+$ip = getIPAddress();
+
+function cartProductQuantity(){
+    Global $pdo;
+    $ip = getIPAddress();
+    $select_query = "SELECT * FROM cart_details WHERE ip_address = ?";
+    $stmt = $pdo->prepare($select_query);
+    $stmt->execute([$ip]);
+    $result = $stmt->rowCount();
+    return $result;
+}
+$cart_product_quantity = cartProductQuantity();
+
+function cartProductTotalPrice(){
+    Global $pdo;
+    $ip = getIPAddress();
+    $select_query = "SELECT SUM(products.price) AS total_price FROM products INNER JOIN cart_details ON products.product_id = cart_details.product_id WHERE cart_details.ip_address =?";
+    $stmt = $pdo->prepare($select_query);
+    $stmt->execute([$ip]);
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $result['total_price'];
+}
+
+?>
+
 <nav class="navbar navbar-expand-lg bg-info">
             <div class="container-fluid">
                 <img src="http://localhost/MyEcomm/images/logo.png" alt="MyEcomm logo" class="logo">
@@ -19,10 +60,10 @@
                             <a class="nav-link" href="#">Contact</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#"><i class="fa-solid fa-cart-shopping"></i><sup class="text-danger">1</sup></a>
+                            <a class="nav-link" href="http://localhost/MyEcomm/cart.php"><i class="fa-solid fa-cart-shopping"></i><sup class="text-danger"><?=$cart_product_quantity?></sup></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Total price</a>
+                            <span class="nav-link">Prix Total <strong class="text-danger"><?=cartProductTotalPrice()?></strong> Fcfa</span>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link disabled" aria-disabled="true">Link</a>

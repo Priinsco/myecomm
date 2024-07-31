@@ -2,12 +2,14 @@
 require("../admin_panel/products/displayAllProducts.php");
 require("viewMoreDetailsActions.php");
 
+
 ?>
 <!doctype html>
 <html lang="en">
     
   <!-- html head -->
-  <?php include("../includes/head.php");?>
+  <?php include("../includes/head.php");
+  ?>
   <style>
     *{
     margin: 0;
@@ -56,7 +58,8 @@ require("viewMoreDetailsActions.php");
      <div class="container-fluid p-0">
 
         <!-- first child -->
-        <?php include("../includes/navbar.php");?>
+        <?php include("../includes/navbar.php");
+        ?>
 
         <!-- second child -->
          <div class="navbar navbar-expand-lg navbar-dark bg-secondary">
@@ -105,7 +108,7 @@ require("viewMoreDetailsActions.php");
                                                 <p class='card-text bg-dark text-light text-center'>$product_desc.</p>
                                                 <p class='card-text bg-dark text-light text-center'>Marque: <span class='tc-orange'>$brand_name</span></p>
                                                 <p class='card-text bg-dark text-light text-center'>Prix: <span class='tc-orange'>$product_price</span> Fcfa</p>
-                                                <a href='#' class='btn btn-info mx-4'>Ajouter au panier</a>
+                                                <a href='../index.php?add_to_cart=$product_id' class='btn btn-info mx-4'>Ajouter au panier</a>
                                                 <a href='../index.php' class='btn btn-dark mx-0'>Retour</a>
                                             </div>
                                         </div>
