@@ -65,9 +65,6 @@ function cartProductTotalPrice(){
                         <li class="nav-item">
                             <span class="nav-link">Prix Total <strong class="text-danger"><?=cartProductTotalPrice()?></strong> Fcfa</span>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link disabled" aria-disabled="true">Link</a>
-                        </li>
                     </ul>
                     <form class="d-flex" role="search">
                         <input class="form-control me-2" type="search" name="search" placeholder="Chercher un produit" aria-label="Search">

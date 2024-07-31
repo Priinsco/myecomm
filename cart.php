@@ -49,6 +49,7 @@ require("functions/common_function.php");
             .pro_img{
                 width:60px;
                 height:60px;
+                object-fit: contain;
             }
 
     </style>
@@ -81,15 +82,14 @@ require("functions/common_function.php");
                         <li class="nav-item">
                             <span class="nav-link">Prix Total <strong class="text-danger"><?=cartProductTotalPrice()?></strong> Fcfa</span>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link disabled" aria-disabled="true">Link</a>
-                        </li>
                     </ul>
                 </div>
             </div>
         </nav>
         <!-- calling cart function -->
-         <?php cart(); ?>
+         <?php cart(); 
+            updateCartProductQuantity();
+         ?>
         <!-- end calling cart function -->
 
         <!-- second child -->
@@ -128,42 +128,51 @@ require("functions/common_function.php");
                         </tr>
                     </thead>
                     <tbody class="table-group-divider">
-                        <?php 
-                            foreach($cart_datas as $data){
-                                $product_image = $data['product_image1'];
-                                $product_name = $data['name'];
-                                $product_price = $data['price'];
-                                echo"
-                                    <tr>
-                                        <th scope='row'>$product_name</th>
-                                        <td><img src='admin_panel/product_images/$product_image' class='pro_img' alt='mmmmmmmm'></td>
-                                        <td>
-                                            <div class='input-group taille_input'>
-                                                <input type='number' name='product_quantity' value='1' class='form-control text-center' aria-label='Dollar amount (with dot and two decimal places)'>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class='input-group taille_input2'>
-                                                <span class='input-group-text'>Fcfa</span>
-                                                <span class='input-group-text'>$product_price</span>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class='form-check form-switch'>
-                                                <input class='form-check-input' type='checkbox' role='switch' id='flexSwitchCheckDefault' >
-                                                <label class='form-check-label' for='flexSwitchCheckDefault'></label>
-                                            </div>
-                                        </td>
-                                        <td>@mdo</td>
-                                    </tr>
-                                ";
-                            }
-                        ?>
+                        <form action="" method="post">
+                            <?php
+                                $ptt = 0;
+                                foreach($cart_datas as $data){
+                                    $product_id = $data['product_id'];
+                                    $product_image = $data['product_image1'];
+                                    $product_name = $data['name'];
+                                    $product_price = $data['price'];
+                                    $ptt += $product_price ;
+                                    echo"
+                                     <input type='hidden' name='product_id[]' value='$product_id'>
+                                        <tr>
+                                            <th scope='row'>$product_name</th>
+                                            <td><img src='admin_panel/product_images/$product_image' class='pro_img' alt='image article'></td>
+                                            <td>
+                                                <div class='input-group taille_input'>
+                                                    <input type='number' name='product_quantity' value='1' class='form-control text-center' aria-label='Dollar amount (with dot and two decimal places)'>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class='input-group taille_input2'>
+                                                    <span class='input-group-text'>Fcfa</span>
+                                                    <span class='input-group-text'>$product_price</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class='form-check form-switch'>
+                                                    <input class='form-check-input' type='checkbox' role='switch' id='flexSwitchCheckDefault' >
+                                                    <label class='form-check-label' for='flexSwitchCheckDefault'></label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <input type='submit' class='btn btn-warning' name='update_product_quantity' value='Modifier la quantité'>
+                                                <button type='button' class='btn btn-danger'>Retirer</button>
+                                            </td>
+                                        </tr>
+                                    ";
+                                }
+                            ?>
+                        </form>
                     </tbody>
                 </table>
                 <div class='input-group my-5'>
                     <span class='input-group-text c-orange'>Prix total: </span>
-                    <span class='input-group-text bg-dark text-danger'><h4>10000 Fcf</h4></span>
+                    <span class='input-group-text bg-dark text-danger'><h4><?=number_format($ptt)?> Fcf</h4></span>
                 <a href="index.php"><button class="btn btn-dark mx-3 my-2">Continuer les achats</button></a>
                 </div>
             </div>
