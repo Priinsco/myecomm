@@ -84,18 +84,40 @@ $cart_datas = cartProductDetails();
 
 // update cart product quantity function
 
+// function updateCartProductQuantity(){
+//     if(isset($_POST['update_product_quantity'])){
+//         Global $pdo;
+//         $quantity = $_POST['product_quantity'];
+//         $ip = getIPAddress();
+//         $get_product_id = $_POST['product_id'];
+
+//             $update_query = "UPDATE cart_details SET quantity = ? WHERE product_id = ? AND ip_address = ?";
+//             $stmt = $pdo->prepare($update_query);
+//             $stmt->execute([$quantity, $get_product_id, $ip]);
+
+//         echo "<script>alert('ip_addresse: $ip, quantité : $quantity, product_id: $get_product_id')</script>";
+//         echo "<script>window.open('cart.php', '_self')</script>";
+//     }
+// }
 function updateCartProductQuantity(){
-    if(isset($_POST['update_product_quantity'])){
-        Global $pdo;
-        $quantity = $_POST['product_quantity'];
+    if (isset($_POST['update_product_quantity'])) {
         $ip = getIPAddress();
-        $get_product_id = $_POST['product_id'];
+        Global $pdo;
+        $product_ids = $_POST['product_id'];
+        $product_quantities = $_POST['product_quantity'];
 
-            $update_query = "UPDATE cart_details SET quantity = ? WHERE product_id = ? AND ip_address = ?";
-            $stmt = $pdo->prepare($update_query);
-            $stmt->execute([$quantity, $get_product_id, $ip]);
+        foreach ($product_ids as $product_id) {
+            if (isset($product_quantities[$product_id])) {
+                $quantity = $product_quantities[$product_id];
+                
+                $update_query = "UPDATE cart_details SET quantity = ? WHERE product_id = ? AND ip_address = ?";
+                $stmt = $pdo->prepare($update_query);
+                $stmt->execute([$quantity, $product_id, $ip]);
 
-        echo "<script>alert('Panier mis à jour')</script>";
+                echo "<script>alert('quantité mise à jour')</script>";
+               
+            }
+        }
         echo "<script>window.open('cart.php', '_self')</script>";
     }
 }
