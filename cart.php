@@ -111,6 +111,8 @@ require("functions/common_function.php");
         <!-- calling cart function -->
          <?php cart(); 
             updateCartProductQuantity();
+            deleteSelectedProducts();
+            isCartEmpty();
          ?>
         <!-- end calling cart function -->
 
@@ -137,13 +139,20 @@ require("functions/common_function.php");
 
 
         <div class="container">
+            <!-- display if cart is not empty-->
+            <?php if (isCartEmpty()): ?>
+                <p class="alert alert-warning">Votre panier est vide.</p>
+                <div class="mb-5">
+                    <a href="index.php"><button type='button' class='btn btn-outline-dark '>Continuer les achats</button></a>
+                </div>
+            <?php else: ?>
             <div class="row">
                 <table class="table table-secondary">
                         <form action="" method="post">
                             <thead>
                                 <div class="input-group update_control">
                                     <input type='submit' class='btn btn-outline-success update_control1' name='update_product_quantity' value='sauvegarder ces quantités'>
-                                    <button type='button' class='btn btn-outline-danger update_control2'>Retirer les articles</button>
+                                    <input type='submit' class='btn btn-outline-danger update_control2' name='delete_selected_products' value='Retirer les articles'> 
                                 </div>
                             
                                 <tr>
@@ -181,7 +190,7 @@ require("functions/common_function.php");
                                                     </td>
                                                     <td>
                                                         <div class='form-check form-switch'>
-                                                            <input class='form-check-input' type='checkbox' role='switch' id='flexSwitchCheckDefault' >
+                                                            <input class='form-check-input' type='checkbox' name='delete_product[$product_id]' role='switch' id='flexSwitchCheckDefault' >
                                                             <label class='form-check-label' for='flexSwitchCheckDefault'></label>
                                                         </div>
                                                     </td>
@@ -202,6 +211,7 @@ require("functions/common_function.php");
                         
                 </div>           
             </div>
+            <?php endif; ?>
         </div>
 
 

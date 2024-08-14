@@ -121,3 +121,51 @@ function updateCartProductQuantity(){
         echo "<script>window.open('cart.php', '_self')</script>";
     }
 }
+
+// verify if cart is not empty
+function isCartEmpty() {
+    global $pdo;
+    $ip = getIPAddress();
+
+    // Préparer la requête pour sélectionner les éléments du panier
+    $select_query = "SELECT COUNT(*) FROM cart_details WHERE ip_address = ?";
+    $stmt = $pdo->prepare($select_query);
+    $stmt->execute([$ip]);
+
+    // Récupérer le nombre d'éléments dans le panier
+    $count = $stmt->fetchColumn();
+
+    // Vérifier si le panier est vide ou non
+    if ($count > 0) {
+        return false; // Le panier n'est pas vide
+    } else {
+        return true;  // Le panier est vide
+    }
+}
+
+// delete cart product function
+function deleteSelectedProducts(){
+    if (isset($_POST['delete_selected_products'])) {
+        $ip = getIPAddress();
+        global $pdo;
+
+        // Vérifiez si des produits ont été sélectionnés pour suppression
+        if (isset($_POST['delete_product'])) {
+            $products_to_delete = $_POST['delete_product'];
+
+            foreach ($products_to_delete as $product_id => $value) {
+                // Supprimez le produit de la base de données
+                $delete_query = "DELETE FROM cart_details WHERE product_id = ? AND ip_address = ?";
+                $stmt = $pdo->prepare($delete_query);
+                $stmt->execute([$product_id, $ip]);
+
+                echo "<script>alert('Produit supprimé avec succès : $product_id')</script>";
+            }
+
+            // Rechargez la page pour mettre à jour le panier
+            echo "<script>window.open('cart.php', '_self')</script>";
+        } else {
+            echo "<script>alert('Aucun produit sélectionné pour suppression.')</script>";
+        }
+     }
+}
