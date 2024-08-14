@@ -141,7 +141,7 @@ require("functions/common_function.php");
         <div class="container">
             <!-- display if cart is not empty-->
             <?php if (isCartEmpty()): ?>
-                <p class="alert alert-warning">Votre panier est vide.</p>
+                <p class="alert alert-warning text-center">Votre panier est vide.</p>
                 <div class="mb-5">
                     <a href="index.php"><button type='button' class='btn btn-outline-dark '>Continuer les achats</button></a>
                 </div>
@@ -203,7 +203,7 @@ require("functions/common_function.php");
                 </table>
                 <div class="mb-5">
                         <a href="index.php"><button type='button' class='btn btn-outline-dark '>Continuer les achats</button></a>
-                        <a href="index.php"><button type='button' class='btn btn-outline-dark '>Passer la Commande</button></a>
+                        <a href="checkout.php"><button type='button' class='btn btn-outline-dark '>Passer la Commande</button></a>
                         <button type='button' class='btn update_control2_price'>
                             <input type='submit' class='btn btn-dark' value='Prix total:'>
                             <button type='button' class='btn btn-dark'><?=number_format($ptt)?> Fcf</button>
