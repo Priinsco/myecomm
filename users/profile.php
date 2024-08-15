@@ -1,3 +1,4 @@
+<?php session_start() ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +7,6 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>payement</h1>
+    <h3>Welcome <?php $_SESSION["username"] ?></h3>
 </body>
 </html>

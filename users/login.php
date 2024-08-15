@@ -17,11 +17,17 @@
 <body>
     <!-- fonction for logo and login image -->
     <?php
+       // login woman image path
         $logpicPrimaryImagePath = "logpic.jpg"; // Chemin principal 
         $logpicBackupImagePath = "../logpic.jpg"; // Chemin de secours
 
+        // myecomm logo image path
         $logoPrimaryImagePath = "logo.png"; // Chemin principal
         $logoBackupImagePath = "../logo.png"; // Chemin de secours
+
+        // login actions file path
+        $loginActionsPrimaryFilePath = "loginActions.php"; // Chemin principal
+        $loginActionsBackupFilePath = "users/loginActions.php"; // Chemin de secours
 
         // Vérifie si le fichier de l'image principale existe
         if (file_exists($logpicPrimaryImagePath)) {
@@ -35,6 +41,12 @@
         } else {
             $logoImagePath = $logoBackupImagePath;
         }
+        // login path
+        if (file_exists($loginActionsPrimaryFilePath)) {
+            $loginActionsfilePath = $loginActionsPrimaryFilePath;
+        } else {
+            $loginActionsfilePath = $loginActionsBackupFilePath;
+        }
 
         // registration path
         $primaryRegistrationPath = "registration.php"; // Chemin de la page de registration
@@ -47,6 +59,15 @@
         }
 
     ?>
+    <?php 
+        // success message and error message
+
+        if(isset($successQuerryMessage)){
+            echo "<p class='alert alert-sucess text-center'>". $successQuerryMessage ."</p>";
+        } else if(isset($failQuerryMessage)){
+            echo "<p class='alert alert-warning text-center text-danger mb-0'>". $failQuerryMessage ."</p>";
+        }
+        ?>
     <!-- end fonction for logo and login image -->
     <section class="vh-90" style="background-color: #9A616D;">
     <div class="container py-5 h-100">
@@ -60,31 +81,32 @@
                 <div class="col-md-6 col-lg-7 d-flex align-items-center">
                 <div class="card-body p-4 p-lg-5 text-black">
 
-                    <form>
+                    <form action="<?php echo $loginActionsfilePath; ?>" method="post">
 
-                    <div class="d-flex align-items-center mb-3 pb-1">
-                        <img src="<?php echo $logoImagePath; ?>" alt="" class="logo_login">
-                    </div>
+                        <div class="d-flex align-items-center mb-3 pb-1">
+                            <img src="<?php echo $logoImagePath; ?>" alt="" class="logo_login">
+                        </div>
 
-                    <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Connectez vous à votre compte</h5>
+                        <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Connectez vous à votre compte</h5>
 
-                    <div data-mdb-input-init class="form-outline mb-2">
-                        <input type="email" id="form2Example17" class="form-control form-control" />
-                        <label class="form-label" for="form2Example17">Address email</label>
-                    </div>
+                        <div data-mdb-input-init class="form-outline mb-2">
+                            <input type="email" id="form2Example17" class="form-control form-control" name="email" />
+                            <label class="form-label" for="form2Example17">Address email</label>
+                        </div>
 
-                    <div data-mdb-input-init class="form-outline mb-2">
-                        <input type="password" id="form2Example27" class="form-control form-control" />
-                        <label class="form-label" for="form2Example27">Mot de posse</label>
-                    </div>
+                        <div data-mdb-input-init class="form-outline mb-2">
+                            <input type="password" id="form2Example27" class="form-control form-control" name="password" />
+                            <label class="form-label" for="form2Example27">Mot de posse</label>
+                        </div>
 
-                    <div class="pt-1 mb-1">
-                        <button data-mdb-button-init data-mdb-ripple-init class="btn btn-dark btn btn-block" type="button">Se connnecter</button>
-                    </div>
+                        <div class="pt-1 mb-1">
+                            <input type="submit" class="btn btn-dark btn-block bg-orange" name="submit" value="Se connnecter">
+                            <!-- <button data-mdb-button-init data-mdb-ripple-init class="btn btn-dark btn btn-block" value="submit" type="submit">Se connnecter</button> -->
+                        </div>
 
-                    <hr>
-                    <a class="small text-muted" href="#!">mot de passe oublié?</a>
-                    <p class="mb-5 pb" style="color: #393f81;">Vous n'avez pas de compte? <a href="<?php echo $registrationPath; ?>">Créez un compte</a></p>
+                        <hr>
+                        <a class="small text-muted" href="#!">mot de passe oublié?</a>
+                        <p class="mb-5 pb" style="color: #393f81;">Vous n'avez pas de compte? <a href="<?php echo $registrationPath; ?>">Créez un compte</a></p>
                     </form>
 
                 </div>

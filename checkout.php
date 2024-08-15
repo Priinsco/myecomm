@@ -82,7 +82,7 @@ function cart(){
                 <div class="col-md-12">
                     <div class="row">
                         <?php 
-                            if(!isset($_SESSION['username'])){
+                            if(!isset($_SESSION['email'])){
                                 include('users/login.php');
                             }else{
                                 include('payement.php');

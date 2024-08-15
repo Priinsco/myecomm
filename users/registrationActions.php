@@ -59,12 +59,28 @@ if(isset($_POST['submit'])) {
                     $stmt = $pdo->prepare($createUserQuery);
                     $stmt->execute([$username, $email, $hashed_password, $ip, $address, $mobile]);
                 }
-                echo "<script>alert('Compte crée avec succès')</script>";
-                echo "<script>window.open('index.php', '_self')</script>";
+
+                // select cart items of the user who just registered
+                $selectCartItems = "SELECT * FROM cart_details WHERE ip_address =?";
+                $stmt = $pdo->prepare($selectCartItems);
+                $stmt->execute([$ip]);
+                if($stmt->rowCount() > 0){
+                    $_SESSION['username'] = $username;
+                    $_SESSION['email'] = $email;
+
+                    echo "<script>alert('Compte crée avec succès, vous avez des articles dans votre panier')</script>";
+                    echo "<script>window.open('../index.php', '_self')</script>";
+                }else{
+                    // Display success message and redirect to the login page
+                    echo "<script>alert('Compte crée avec succès')</script>";
+                    echo "<script>window.open('../index.php', '_self')</script>";
+                }
+                
             }else{
-                $failQuerryMessage="Cette adresse email est déjà indisponible.";
+                $failQuerryMessage="Cette adresse email est indisponible.";
             }    
         }else{
+            echo "<script>alert('echec sur le mot de passe>";
             $failQuerryMessage="Les mots de passe ne correspondent pas.";
         }  
         
