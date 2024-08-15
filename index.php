@@ -79,7 +79,7 @@ function cart(){
                     <a class="nav-link" href="#">Welcome guest</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Se connecter</a>
+                    <a class="nav-link" href="users/login.php">Se connecter</a>
                 </li>
 
             </ul>
@@ -87,8 +87,8 @@ function cart(){
          </div>
          <!-- third child -->
           <div class="bg-light ">
-                <h3 class="text-center">MyEcomm store</h3>
-                <p class="text-center">La communication est au coeur de l'ecommerce et de la communauté</p>
+                <h3 class="text-center">MyEcomm - Le super market</h3>MyEcomm - Le super market À votre service pour rendre votre vie plus simple.
+                <p class="text-center">À votre service pour rendre votre vie plus simple.</p>
           </div>
           <!-- fourth child -->
            <div class="row">

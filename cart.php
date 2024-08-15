@@ -93,7 +93,7 @@ require("functions/common_function.php");
                             <a class="nav-link" href="indexAllProducts.php">Products</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Register</a>
+                            <a class="nav-link" href="users/registration.php">Register</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Contact</a>
@@ -123,7 +123,7 @@ require("functions/common_function.php");
                     <a class="nav-link" href="#">Welcome guest</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Se connecter</a>
+                    <a class="nav-link" href="users/login.php">Se connecter</a>
                 </li>
 
             </ul>
@@ -131,8 +131,8 @@ require("functions/common_function.php");
          </div>
          <!-- third child -->
           <div class="bg-light ">
-                <h3 class="text-center">MyEcomm store</h3>
-                <p class="text-center">La communication est au coeur de l'ecommerce et de la communauté</p>
+                <h3 class="text-center"><img src="http://localhost/MyEcomm/images/logo.png" alt="MyEcomm logo" class="logo"></h3>
+                <p class="text-center">À votre service pour rendre votre vie plus simple.</p>
           </div>
           <!-- fourth child -->
 
