@@ -1,4 +1,5 @@
 <?php
+session_start();
 require("admin_panel/products/displayAllProducts.php");
 // require("functions/common_function.php")
 
@@ -82,10 +83,10 @@ function cart(){
                 <div class="col-md-12">
                     <div class="row">
                         <?php 
-                            if(!isset($_SESSION['email'])){
+                            if(!isset($_SESSION['username'])){
                                 include('users/login.php');
                             }else{
-                                include('payement.php');
+                                include('users/payement.php');
                             }
                         ?>
                     </div>

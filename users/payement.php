@@ -1,6 +1,3 @@
-<?php 
-    session_start();
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,6 +9,7 @@
 <body>
     <h1>payement</h1>
     <h3>Welcome <?=$_SESSION["username"];?></h3>
+    <h3>Welcome <?=$_SESSION["user_email"];?></h3>
     <?php 
         // success message and error message
 

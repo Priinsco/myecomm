@@ -1,4 +1,5 @@
 <?php
+session_start();
 require("../admin_panel/products/displayAllProducts.php");
 require("viewMoreDetailsActions.php");
 
@@ -64,20 +65,34 @@ require("viewMoreDetailsActions.php");
         <!-- second child -->
          <div class="navbar navbar-expand-lg navbar-dark bg-secondary">
             <ul class="navbar-nav me-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Welcome guest</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Se connecter</a>
-                </li>
+                <?php 
+                    if(isset($_SESSION['username'])){
+                        $username=$_SESSION['username'];
+                        echo "<li class='nav-item'>
+                            <h2 class='nav-link'>Welcome $username</a>
+                        </li>
+                        <li class='nav-ite'>
+                            <a class='nav-link' href='../users/logout'>Se deconnecter</a>
+                        </li>
+                        ";
+                    }else{
+                        echo "<li class='nav-item'>
+                            <h2 class='nav-link'>Bienvenu cher invité</h2>
+                        </li>
+                        <li class='nav-ite'>
+                            <a class='nav-link' href='../users/login.php'>Se connecter</a>
+                        </li>
+                        ";
+                    }
+                ?>
 
             </ul>
 
          </div>
          <!-- third child -->
           <div class="bg-light ">
-                <h3 class="text-center">MyEcomm store</h3>
-                <p class="text-center">La communication est au coeur de l'ecommerce et de la communauté</p>
+                <h3 class="text-center">MyEcomm - Le super market</h3>
+                <p class="text-center">À votre service pour rendre votre vie plus simple.</p>
           </div>
           <!-- fourth child -->
            <div class="row">

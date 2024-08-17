@@ -1,4 +1,5 @@
 <?php
+session_start();
 require("admin_panel/products/displayAllProducts.php");
 // require("functions/common_function.php")
 
@@ -75,19 +76,37 @@ function cart(){
         <!-- second child -->
          <div class="navbar navbar-expand-lg navbar-dark bg-secondary">
             <ul class="navbar-nav me-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Welcome guest</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="users/login.php">Se connecter</a>
-                </li>
+                <?php 
+                    if(isset($_SESSION['username'])){
+                        $username=$_SESSION['username'];
+                        
+                        echo "
+                            <li class='nav-item'>
+                                <a class='nav-link' href='#'>Welcome $username</a>
+                            </li>
+
+                            <li class='nav-item'>
+                                <a class='nav-link' href='users/logout.php'>Se deconnecter</a>
+                            </li>
+                        ";
+                    }else{
+                        echo "
+                            <li class='nav-item'>
+                                <a class='nav-link' href='#'>Welcome Guest</a>
+                            </li>
+                            <li class='nav-item'>
+                                <a class='nav-link' href='users/login.php'>Se connecter</a>
+                            </li>
+                        ";
+                    }
+                ?>
 
             </ul>
 
          </div>
          <!-- third child -->
           <div class="bg-light ">
-                <h3 class="text-center">MyEcomm - Le super market</h3>MyEcomm - Le super market À votre service pour rendre votre vie plus simple.
+                <h3 class="text-center">MyEcomm - Le super market</h3>
                 <p class="text-center">À votre service pour rendre votre vie plus simple.</p>
           </div>
           <!-- fourth child -->
@@ -112,7 +131,7 @@ function cart(){
                                     <h5 class='card-title'>$product_name</h5>
                                     <p class='card-text'>Prix: $product_price Fcfa</p>
                                     <a href='index.php?add_to_cart=$product_id' class='btn btn-info'>Ajouter au panier</a>
-                                    <a href='products/viewMoreDetails.php?product_id=$product_id' class='btn btn-secondary'>Voir plus</a>
+                                    <a href='products/viewMoreDetails.php?product_id=$product_id?details' class='btn btn-secondary'>Voir plus</a>
                                 </div>
                             </div>
                         </div>";

@@ -1,4 +1,5 @@
 <?php
+session_start();
 require("admin_panel/products/displayAllProducts.php");
 require("functions/common_function.php");
 
@@ -92,9 +93,15 @@ require("functions/common_function.php");
                         <li class="nav-item">
                             <a class="nav-link" href="indexAllProducts.php">Products</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="users/registration.php">Register</a>
-                        </li>
+                        <?php 
+                            if(!isset($_SESSION['username'])){
+                                echo "
+                                    <li class='nav-item'>
+                                        <a class='nav-link' href='users/registration.php'>Register</a>
+                                    </li>
+                                ";
+                            }
+                        ?>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Contact</a>
                         </li>
@@ -119,12 +126,28 @@ require("functions/common_function.php");
         <!-- second child -->
          <div class="navbar navbar-expand-lg navbar-dark bg-secondary">
             <ul class="navbar-nav me-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Welcome guest</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="users/login.php">Se connecter</a>
-                </li>
+                <?php 
+                    if(isset($_SESSION['username'])){
+                        $username = $_SESSION['username'];
+                        echo"
+                            <li class='nav-item'>
+                                <h2 class='nav-link'>Welcome $username</h2>
+                            </li>
+                            <li class='nav-item'>
+                                <a class='nav-link' href='users/logout.php'>Se deconnecter</a>
+                            </li>
+                        ";
+                    }else{
+                        echo "
+                           <li class='nav-item'>
+                                <h2 class='nav-link'>Bienvenue cher invité</h2>
+                            </li>
+                            <li class='nav-item'>
+                                <a class='nav-link' href='users/login.php'>Se Connecter</a>
+                            </li>
+                        ";
+                    }
+                ?>
 
             </ul>
 

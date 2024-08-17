@@ -44,7 +44,7 @@ if(isset($_POST['submit'])) {
                 $stmt = $pdo->prepare($select_query);
                 $stmt->execute([$ip]);
                 if($stmt->fetchColumn() > 0){
-                    echo "<script>window.open('payement.php', '_self')</script>";
+                    echo "<script>window.open('../index.php', '_self')</script>";
                 } else{
                     echo "<script>window.open('profile.php', '_self')</script>";
                 }

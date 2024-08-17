@@ -53,9 +53,17 @@ function cartProductTotalPrice(){
                         <li class="nav-item">
                             <a class="nav-link" href="indexAllProducts.php">Products</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="users/registration.php">Register</a>
-                        </li>
+                        <?php if(isset($_GET['details'])){
+                            $path="myecomm/users/registration.php";
+                        }else{
+                            $path="../users/registration.php";
+                        }
+                        if(!isset($_SESSION['username'])){
+                            echo "<li class='nav-item'>
+                                    <a class='nav-link' href='<?php echo $path ;?>'>Register</a>
+                                </li>";
+                        }
+                        ?>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Contact</a>
                         </li>
